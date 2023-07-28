@@ -54,6 +54,9 @@ const Uploader = () => {
 
   const uploadOnDisk = async () => {
     setIsUploading(true);
+    if (files.length > 100) {
+      return alert("Превышено максимальное количество файлов (100)");
+    }
     for (let i = 0; i < files.length; i++) {
       const res = await fetch(files[i].href, {
         method: "PUT",
