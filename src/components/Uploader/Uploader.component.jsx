@@ -7,6 +7,7 @@ import FadeLoader from "react-spinners/FadeLoader";
 import ClipLoader from "react-spinners/ClipLoader";
 
 import Counter from "../Counter/Counter.component";
+import LogIn from "../LogIn/LogIn.component";
 
 import "./uploader.styles.css";
 
@@ -67,29 +68,41 @@ const Uploader = () => {
 
   return (
     <div className="container">
-      <form method="PUT">
-        <label className="input-file">
-          <input onChange={(e) => inputHandler(e)} type="file" name="file" />
-          <span>Выберите файл</span>
-        </label>
-      </form>
-
-      <div>
-        {files.map((file, i) => (
-          <h5 key={i}>{file.name}</h5>
-        ))}
-      </div>
-      {isLoading ? (
+      {accessToken ? (
         <>
-          <FadeLoader className="loading" />
-        </>
-      ) : isUploading ? (
-        <>
-          <ClipLoader />
-          <Counter />
+          {" "}
+          <form method="PUT">
+            <label className="input-file">
+              <input
+                onChange={(e) => inputHandler(e)}
+                type="file"
+                name="file"
+              />
+              <span>Выберите файл</span>
+            </label>
+          </form>
+          <div>
+            {files.map((file, i) => (
+              <h5 key={i}>{file.name}</h5>
+            ))}
+          </div>
+          {isLoading ? (
+            <>
+              <FadeLoader className="loading" />
+            </>
+          ) : isUploading ? (
+            <>
+              <ClipLoader />
+              <Counter />
+            </>
+          ) : (
+            files.length > 0 && (
+              <button onClick={uploadOnDisk}>загрузить</button>
+            )
+          )}
         </>
       ) : (
-        files.length > 0 && <button onClick={uploadOnDisk}>загрузить</button>
+        <LogIn />
       )}
     </div>
   );
