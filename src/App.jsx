@@ -1,14 +1,8 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import Uploader from "./components/Uploader/Uploader.component";
 
 function App() {
-  return (
-    <>
-      <input type="file"></input>
-    </>
-  );
+  return <Uploader />;
 }
 
 export default App;
